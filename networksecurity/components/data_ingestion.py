@@ -33,7 +33,7 @@ class DataIngestion:
         try:
             database_name=self.data_ingestion_config.database_name
             collection_name=self.data_ingestion_config.collection_name
-            print(MONGO_DB_URL)
+            #print(MONGO_DB_URL)
             self.mongo_client=pymongo.MongoClient(MONGO_DB_URL)
             collection=self.mongo_client[database_name][collection_name]
             print(len(list(collection.find())))
@@ -43,7 +43,7 @@ class DataIngestion:
                 df=df.drop(columns=["_id"],axis=1)
             
             df.replace({"na":np.nan},inplace=True)
-            print(df)
+            #print(df)
             return df
         except Exception as e:
             raise NetworkSecurityException
@@ -64,7 +64,7 @@ class DataIngestion:
         try:
 
             logging.info("Performed train test split on the dataframe")
-            print(dataframe)
+            #print(dataframe)
             train_set, test_set = train_test_split(
                 dataframe, test_size=self.data_ingestion_config.train_test_split_ratio
             )
@@ -98,9 +98,8 @@ class DataIngestion:
         try:
             dataframe=self.export_collection_as_dataframe()
             dataframe=self.export_data_into_feature_store(dataframe)
-            print("hihihi")
             file_path = self.split_data_as_train_test(dataframe)
-            print(file_path)
+            #print(file_path)
             dataingestionartifact=DataIngestionArtifact(trained_file_path=file_path[0],
                                                         test_file_path=file_path[1])
             return dataingestionartifact

@@ -58,4 +58,4 @@ if __name__ == "__main__":
     records = dataextractor.csv_to_json_converter(FILE_PATH)
     no_of_records = dataextractor.insert_data_to_mongodb(records=records,database=DATABASE,collection=COLLECTION)
 
-    print(no_of_records)
+    #print(no_of_records)
